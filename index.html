@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Rentals India — Affordable Rentals Across India</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Favicon emoji shortcut -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       NAVBAR
+  ════════════════════════════════ -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">🚗</div>
+      <span>Car Rentals <em>India</em></span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="#cars">Cars</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+
+    <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════ -->
+  <section class="hero" id="home">
+    <!-- Animated background circles -->
+    <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;">
+      <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,0,0.08),transparent 60%);top:-100px;right:-150px;"></div>
+      <div style="position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(19,136,8,0.06),transparent 60%);bottom:50px;left:-100px;"></div>
+    </div>
+
+    <div class="hero-badge">
+      <span class="dot"></span>
+      🇮🇳 India's Most Affordable Car Rental Platform
+    </div>
+
+    <h1>Rent Affordable Cars<br><span class="highlight">Across India</span></h1>
+    <p class="hero-sub">Best prices for daily &amp; monthly rentals. No hidden charges. Drive stress-free.</p>
+
+    <!-- Search Bar -->
+    <div class="search-box" id="searchBox">
+      <div class="search-field">
+        <label>🔍 Search Car</label>
+        <input type="text" id="searchName" placeholder="e.g. Nexon, Creta..." />
+      </div>
+      <div class="search-field">
+        <label>🏙️ City</label>
+        <select id="searchCity">
+          <option value="">All Cities</option>
+          <option>Hyderabad</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+          <option>Chennai</option>
+          <option>Pune</option>
+          <option>Kolkata</option>
+          <option>Jaipur</option>
+          <option>Ahmedabad</option>
+          <option>Lucknow</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>⛽ Fuel Type</label>
+        <select id="searchFuel">
+          <option value="">Any Fuel</option>
+          <option>Petrol</option>
+          <option>Diesel</option>
+          <option>CNG</option>
+          <option>Electric</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>💺 Seats</label>
+        <select id="searchSeats">
+          <option value="">Any</option>
+          <option value="4">4 Seats</option>
+          <option value="5">5 Seats</option>
+          <option value="7">7 Seats</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label>📅 Pickup Date</label>
+        <input type="date" id="pickupDate" />
+      </div>
+      <div class="search-field">
+        <label>📅 Return Date</label>
+        <input type="date" id="returnDate" />
+      </div>
+      <div class="search-field search-btn">
+        <label style="visibility:hidden">Search</label>
+        <button class="btn-search" onclick="handleSearch()">
+          🔍 Search Cars
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Car Models</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Indian Cities</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">₹1200</div>
+        <div class="stat-label">Starting/Day</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Support</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       TRENDING SLIDER
+  ════════════════════════════════ -->
+  <section class="slider-section">
+    <div class="section-header" style="margin-bottom:1.5rem;">
+      <span class="section-tag">🔥 Hot Picks</span>
+      <h2>Trending Cars in India</h2>
+    </div>
+    <div class="slider-track-wrap">
+      <div class="slider-track" id="sliderTrack">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       CARS LISTING
+  ════════════════════════════════ -->
+  <section class="section" id="cars">
+    <div class="section-header">
+      <span class="section-tag">🚗 Our Fleet</span>
+      <h2>Browse Available Cars</h2>
+      <p>All cars verified &amp; sanitized. Transparent pricing in ₹.</p>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-bar">
+      <button class="filter-pill active" data-filter="all">All Cars</button>
+      <button class="filter-pill" data-filter="budget">💰 Budget Cars</button>
+      <button class="filter-pill" data-filter="family">👨‍👩‍👧 Family Cars</button>
+      <button class="filter-pill" data-filter="Sedan">🚗 Sedans</button>
+      <button class="filter-pill" data-filter="SUV">🚙 SUVs</button>
+      <button class="filter-pill" data-filter="Electric">⚡ Electric</button>
+    </div>
+
+    <!-- Car Grid -->
+    <div class="cars-grid" id="carsGrid">
+
+      <!-- Loaded dynamically -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       CITIES SECTION
+  ════════════════════════════════ -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-header">
+      <span class="section-tag">📍 Coverage</span>
+      <h2>Available Across India</h2>
+      <p>Select your city to see available cars near you.</p>
+    </div>
+    <div class="cities-grid">
+      <div class="city-chip" onclick="filterByCity('Hyderabad')">🏙️ Hyderabad</div>
+      <div class="city-chip" onclick="filterByCity('Mumbai')">🌊 Mumbai</div>
+      <div class="city-chip" onclick="filterByCity('Delhi')">🕌 Delhi</div>
+      <div class="city-chip" onclick="filterByCity('Bangalore')">🌳 Bangalore</div>
+      <div class="city-chip" onclick="filterByCity('Chennai')">🌅 Chennai</div>
+      <div class="city-chip" onclick="filterByCity('Pune')">🎓 Pune</div>
+      <div class="city-chip" onclick="filterByCity('Kolkata')">🎭 Kolkata</div>
+      <div class="city-chip" onclick="filterByCity('Jaipur')">🏰 Jaipur</div>
+      <div class="city-chip" onclick="filterByCity('Ahmedabad')">🏭 Ahmedabad</div>
+      <div class="city-chip" onclick="filterByCity('Lucknow')">🌹 Lucknow</div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer>
+    <p>© 2024 <span>Car Rentals India</span> · Made with ❤️ for Bharat · Available across major Indian cities</p>
+  </footer>
+
+  <!-- ════════════════════════════════
+       BOOKING MODAL
+  ════════════════════════════════ -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>🚗 Book Your Ride</h3>
+      <div class="modal-car-name" id="modalCarName">Hyundai Creta · ₹2200/day</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="bName" placeholder="Rahul Sharma" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="bPhone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="bEmail" placeholder="rahul@email.com" />
+        </div>
+        <div class="form-group">
+          <label>City *</label>
+          <select id="bCity">
+            <option value="">Select City</option>
+            <option>Hyderabad</option><option>Mumbai</option><option>Delhi</option>
+            <option>Bangalore</option><option>Chennai</option><option>Pune</option>
+            <option>Kolkata</option><option>Jaipur</option><option>Ahmedabad</option>
+            <option>Lucknow</option><option>Bhopal</option>
+          </select>
+          <div class="form-group full">
+  <label>Delivery Address *</label>
+  <textarea id="bAddress" placeholder="Enter full address (House no, street, area, landmark)"></textarea>
+</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Pickup Date *</label>
+          <input type="date" id="bPickupDate" onchange="calcPrice()" />
+        </div>
+        <div class="form-group">
+          <label>Pickup Time</label>
+          <input type="time" id="bPickupTime" value="10:00" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Return Date *</label>
+          <input type="date" id="bReturnDate" onchange="calcPrice()" />
+        </div>
+        <div class="form-group">
+          <label>Return Time</label>
+          <input type="time" id="bReturnTime" value="10:00" />
+        </div>
+      </div>
+
+      <div class="price-preview">
+        <span class="label" id="priceDays">Select dates to see total</span>
+        <span class="total" id="priceTotal">₹—</span>
+      </div>
+
+      <button class="btn-confirm" onclick="submitBooking()">✅ Confirm Booking</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMsg">Booking confirmed!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
